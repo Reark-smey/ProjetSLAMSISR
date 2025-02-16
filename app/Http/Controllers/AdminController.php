@@ -50,4 +50,6 @@ class AdminController
         }
         return view('vues/ListeDroitsBeaujolais',compact('lesAdherents'));
     }
+
+
 }

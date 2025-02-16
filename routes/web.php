@@ -35,6 +35,8 @@ Route::get('/listerBadgesLibresByGolf/{id}',[BadgesLibresController::class,'list
 
 Route::get('listerBadgesRecuperer', 'App\Http\Controllers\BadgesLibresController@listerBadgesRecuperer');
 
+Route::get('AjouterAdherent', [\App\Http\Controllers\AdminController::class,'AjouterAdherent']);
+
 
 
 Route::get('/ajouterEmploye', function () {return view('vues/formEmploye');});

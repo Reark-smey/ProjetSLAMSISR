@@ -63,7 +63,7 @@ class BadgesLibresController
             $golf = $serviceBadgesLibres->getBadgesLibresRecuperer();
             $title = "Liste des badges Récupérés :";
 
-            return view('vues/ListeBadgesRecuperer', compact('title','golf'));
+            return view('vues/ListeBadgeRecuperer', compact('title','golf'));
         } catch (Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/error', compact('erreur'));

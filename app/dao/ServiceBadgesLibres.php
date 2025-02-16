@@ -61,13 +61,11 @@ class ServiceBadgesLibres
     public function getBadgesLibresRecuperer() {
         try {
             $golf = DB::table('badge_libres')
-                ->Select('badge_libres.IdBadgeLibre', 'badge_libres.DateLiberation','badge_libres.status','badges_libres.DateRecuperer', 'badges.IdBadge','badges.Jour','badges.Lieu'
+                ->Select('badge_libres.IdBadgeLibre', 'badge_libres.DateLiberation','badge_libres.status','badge_libres.DateRecuperer', 'badges.IdBadge','badges.Jour','badges.Lieu'
                 ,'adherents.NomAdherent','adherents.PrenomAdherent')
                 ->join('badges', 'badges.IdBadge', '=', 'badge_libres.IdBadge')
                 ->join('adherents','adherents.IdAdherent','=','badges.IdAdherent')
-                ->join('etre_autoriser','etre_autoriser.IdAdherent','=','adherents.IdAdherent')
-                ->join('golf','golf.IdGolf','=','etre_autoriser.IdGolf')
-                ->where('badge_libres.status', '!=',NULL)
+                ->where('badge_libres.status', 'IS NOT',NULL)
                 ->paginate(25);
             return $golf;
         } catch (QueryException $e) {
