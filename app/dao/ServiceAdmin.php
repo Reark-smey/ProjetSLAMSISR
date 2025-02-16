@@ -2,6 +2,8 @@
 
 namespace App\dao;
 
+use App\Models\Adherents;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\MonException;
 use Mockery\Exception;
@@ -93,5 +95,37 @@ class ServiceAdmin
         }
     }
 
+    public function saveAdherent(Adherents $adherent){
+        try{
+            $adherent->save();
+        }catch(QueryException $e){
+            $erreur = $e->getMessage();
+            if(!isset($adherent->NomAdherent)) {
+                $erreur="Vous devez mettre un Nom";
+            }
+            else if(!isset($adherent->PrenomAdherent)) {
+                $erreur="Vous devez mettre un prénom";
+            }
+            else if(!isset($adherent->Adherent_username)) {
+                $erreur="Vous devez mettre un identifiant";
+            }
+            else if(!isset($adherent->mdp_adherent)) {
+                $erreur="Vous devez mettre un mot de passe";
+            }
+            else if(!isset($adherent->type)) {
+                $erreur="Vous devez mettre un type";
+            }
+            throw new MonException($erreur, 5);
+        }
+    }
+    public function getAdherent($id)
+    {
+        try {
+            return Adherents::query()
+                ->findOrFail($id);
+        } catch(QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
 
 }
