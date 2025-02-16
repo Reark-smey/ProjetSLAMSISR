@@ -33,6 +33,8 @@ Route::get('selGolf', [\App\Http\Controllers\BadgesLibresController::class,'list
 Route::post('/validerGolf', [BadgesLibresController::class,'validerGolf'])->name('postGolf');
 Route::get('/listerBadgesLibresByGolf/{id}',[BadgesLibresController::class,'listerBadgesLibresByGolf'])->name('golf');
 
+Route::get('listerBadgesRecuperer', 'App\Http\Controllers\BadgesLibresController@listerBadgesRecuperer');
+
 
 
 Route::get('/ajouterEmploye', function () {return view('vues/formEmploye');});

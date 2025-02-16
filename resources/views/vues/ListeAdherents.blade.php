@@ -2,9 +2,10 @@
 @section('content')
 
 
+
     <div class="container">
         <div class="blanc">
-            <h1>Liste de mes Employes</h1>
+            <h1>Liste des membres</h1>
         </div>
         <table class="table table-borderer table-striped">
             <thead>
@@ -55,6 +56,6 @@
         </div>
     </div>
 
-
+@stop
 
 

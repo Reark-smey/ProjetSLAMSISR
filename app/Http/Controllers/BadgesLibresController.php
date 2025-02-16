@@ -56,4 +56,17 @@ class BadgesLibresController
             return view('vues/error', compact('erreur'));
         }
     }
+
+    public function listerBadgesRecuperer() {
+        try {
+            $serviceBadgesLibres = new ServiceBadgesLibres();
+            $golf = $serviceBadgesLibres->getBadgesLibresRecuperer();
+            $title = "Liste des badges Récupérés :";
+
+            return view('vues/ListeBadgesRecuperer', compact('title','golf'));
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/error', compact('erreur'));
+        }
+    }
 }

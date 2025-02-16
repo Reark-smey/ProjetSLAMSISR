@@ -4,32 +4,32 @@
     <br><br><br><br>
     <div class="container">
         <div class="blanc">
+
             <h1> {{$title}}</h1>
         </div>
         <table class="table table-borderer table-striped">
             <thead>
             <tr>
 
-                <th>Date</th>
+                <th>Date du badge</th>
                 <th>Jour</th>
                 <th>Lieu</th>
-                <th>Réserver</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de récupération</th>
 
             </tr>
             </thead>
-            @foreach($golf as $unBadgeLibre)
+            @foreach($golf as $unBadgeRecuperer)
 
                 <tr>
-                    <td>{{$unBadgeLibre->DateLiberation}} </td>
-                    <td>{{$unBadgeLibre->Jour}}</td>
-                    <td>{{$unBadgeLibre->Lieu}}</td>
-                    <td style="text-align:center;">
-                        <a href="{{url('/ReserverBadgeLibre')}}/{{$unBadgeLibre->IdBadgeLibre}}">
-                            <span class="glyphicon glyphicon-book" data-toggle="tooltip" data-placement="top" title="Réserver">
+                    <td>{{$unBadgeRecuperer->DateLiberation}} </td>
+                    <td>{{$unBadgeRecuperer->Jour}}</td>
+                    <td>{{$unBadgeRecuperer->Lieu}}</td>
+                    <td>{{$unBadgeRecuperer->NomAdherent}}</td>
+                    <td>{{$unBadgeRecuperer->PrenomAdherent}}</td>
+                    <td>{{$unBadgeRecuperer->DateRecuperer}}</td>
 
-                            </span>
-                        </a>
-                    </td>
                 </tr>
 
 
