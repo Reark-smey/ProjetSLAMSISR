@@ -1,5 +1,9 @@
 @extends('layouts.master')
 @section('content')
+    <br>
+    <br>
+    <br>
+    <br>
     <div>
         <div class="container">
             <div class="blanc">
