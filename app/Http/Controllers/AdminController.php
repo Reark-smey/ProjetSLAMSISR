@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\MonException;
 use App\Models\Adherents;
+use App\Models\Badges;
 use App\Models\etre_autoriser;
 use App\Models\golf;
 use Illuminate\Http\Request;
@@ -189,100 +190,80 @@ class AdminController
         }
     }
 
-    public function AjouterBadge(Request $request)
+    public function ChoisirAdherent()
     {
         try {
-            $title="Ajouter un badge à un adhérent";
-            // Récupération de l'adhérent sélectionné dans le formulaire
-            $idAdherent = $request->input('adherent');
-
+            $title = "Choisir un adhérent";
+            $badge = new Badges();
             $serviceAdmin = new ServiceAdmin();
-            $golf = $serviceAdmin->getAllGolf();
-            $adherent = $serviceAdmin->getAllAdherent();
+            $adherent = $serviceAdmin->getAllAdherents();
+            return view('vues/FormChoisirAdherent', compact('title', 'badge','adherent'));
 
-            // Récupère les choix où l'adhérent est autorisé
-            $choixAutorises = [];
-            if ($idAdherent) {
-                $choixAutorises = etre_autoriser::where('IdAdherent', $idAdherent)->pluck('IdGolf')->toArray();
-            }
-
-            // Tableau des noms des golfs
-            $nomsGolfs = [
-                1 => 'Golf du Clou',
-                2 => 'Golf du Gouverneur',
-                3 => 'Golf du Beaujolais'
-            ];
-
-            // Filtrer pour ne garder que les choix autorisés
-            $options = array_filter($nomsGolfs, function ($key) use ($choixAutorises) {
-                return in_array($key, $choixAutorises);
-            }, ARRAY_FILTER_USE_KEY);
-
-            // Tableau des jours de la semaine commençant par Dimanche
-            $joursSemaine = [
-                1 => 'Dimanche',
-                2 => 'Lundi',
-                3 => 'Mardi',
-                4 => 'Mercredi',
-                5 => 'Jeudi',
-                6 => 'Vendredi',
-                7 => 'Samedi'
-            ];
-
-            // Passer l'adhérent sélectionné, les options et les jours à la vue
-            return view('vues/AjouterBadge', compact('options','title', 'golf', 'adherent', 'idAdherent', 'joursSemaine'));
 
         } catch (Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/error', compact('erreur'));
         }
+
     }
-
-
-
-
-    public function validerAjoutBadge(Request $request)
-    {
+    public function validerChoixAdherent(Request $request){
         try {
-            // Récupération des données du formulaire
-            $idAdherent = $request->input('adherent');
-            $jour = $request->input('Jour');
-            $lieu = $request->input('Lieu');
-
-            // Vérification que toutes les données nécessaires sont présentes
-            if ($idAdherent && $jour && $lieu) {
-                // Vérification si le badge existe déjà pour cet adhérent, ce jour et ce lieu
-                $badgeExistant = badges::where('IdAdherent', $idAdherent)
-                    ->where('Jour', $jour)
-                    ->where('IdGolf', $lieu)
-                    ->first();
-
-                if ($badgeExistant) {
-                    // Mise à jour du badge existant si nécessaire
-                    $badgeExistant->updated_at = now();
-                    $badgeExistant->save();
-                } else {
-                    // Création d'un nouveau badge
-                    $badge = new badges();
-                    $badge->IdAdherent = $idAdherent;
-                    $badge->Jour = $jour;
-                    $badge->IdGolf = $lieu;
-                    $badge->save();
-                }
-
-                return redirect('listerAdherents')->with('success', 'Badge ajouté avec succès.');
-            } else {
-                return redirect()->back()->with('error', 'Veuillez remplir tous les champs.');
+            $serviceAdmin = new ServiceAdmin();
+            $id_badges = $request->input('hid_id');
+            if ($id_badges == 0) {
+                $badges = new badges();
             }
-        } catch (Exception $e) {
+
+            $badges->IdAdherent = $request->input('adherent');
+            session(['badges' => $badges]);
+            $serviceAdmin->saveBadge($badges);
+            return redirect('AjouterBadge/{id}');
+        } catch(Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/error', compact('erreur'));
         }
     }
 
+    public function AjouterBadge($id) {
+        try {
+            $title = "Choisir le lieu et le jour";
+            $serviceAdmin = new ServiceAdmin();
+            $Lieu = $serviceAdmin->getGolfByAutorisation($id);
 
+            // Récupération de l'IdBadge depuis la session
+            $idBadge = session('badges');
+            if (is_object($idBadge)) {
+                $idBadge = $idBadge->IdBadge;
+            }
+            // Si c'est un tableau
+            elseif (is_array($idBadge)) {
+                $idBadge = $idBadge['IdBadge'];
+            }
 
+            return view('vues/AjouterBadge',
+                compact('Lieu','title','idBadge'));
 
+        } catch (Exception $exception) {
+            $erreur = $exception->getMessage();
+            return view('vues/error', compact('erreur'));
+        }
+    }
 
+    public function validerAjoutBadge(Request $request) {
+        try {
+                $serviceAdmin = new ServiceAdmin();
+                $id_badges = $request->input('hid_id');
+                $badge = $serviceAdmin->GetBadge($id_badges);
+                $badge->Lieu = $request->input('Lieu');
+                $badge->Jour = $request->input('Jour');
+                $serviceAdmin->saveBadge($badge);
+
+                return redirect('listerAdherents');
+
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/error', compact('erreur'));
+        }
+    }
 
 }

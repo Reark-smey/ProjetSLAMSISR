@@ -12,5 +12,8 @@ class Badges extends Model
     protected $table='badges';
     protected $primaryKey ='IdBadge';
     public $timestamps=false;
+    public $incrementing=true;
+
+    protected $keyType = 'int';
 
 }

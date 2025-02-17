@@ -3,12 +3,15 @@
 namespace App\dao;
 
 use App\Models\Adherents;
+use App\Models\Badges;
 use App\Models\etre_autoriser;
 use App\Models\golf;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\MonException;
 use Mockery\Exception;
+use function Laravel\Prompts\select;
+
 class ServiceAdmin
 {
     public function getListeAdherents() {
@@ -132,6 +135,24 @@ class ServiceAdmin
             throw new MonException($erreur, 5);
         }
     }
+
+    public function GetBadge($id){
+        try {
+            return Badges::query()
+                ->findOrFail($id);
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage());
+
+        }
+    }
+    public function saveBadge(Badges $badge){
+        try {
+            $badge->save();
+        } catch(QueryException $e){
+            $erreur = $e->getMessage();
+            throw new MonException($erreur, 5);
+        }
+    }
     public function getAdherent($id)
     {
         try {
@@ -189,6 +210,23 @@ class ServiceAdmin
 
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+    public function getGolfByAutorisation($id){
+        try {
+            $golf = DB::table('golf')
+            ->select('golf.IdGolf','golf.NomGolf','etre_autoriser.IdAdherent','etre_autoriser.IdGolf')
+                ->join('etre_autoriser','etre_autoriser.IdGolf','=','golf.IdGolf')
+                ->join('adherents','etre_autoriser.IdAdherent','=','adherents.IdAdherent')
+                ->join('badges','badges.IdAdherent','=','adherents.IdAdherent')
+                ->where('adherents.IdAdherent','=',$id)
+                ->distinct()
+            ->get();
+            return $golf;
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+
         }
     }
 

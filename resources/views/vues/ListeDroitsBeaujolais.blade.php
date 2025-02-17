@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{$unAdh->NomAdherent}} {{$unAdh->PrenomAdherent}}</td>
                     <td style="text-align:center;">
-                        <a href="{{url('/ProfilAdherent')}}/{{$unAdh->IdAdherent}}">
+                        <a href="{{url('/modifierAdherent')}}/{{$unAdh->IdAdherent}}">
                             <span class="glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="top" title="Voir Profil">
 
                             </span>

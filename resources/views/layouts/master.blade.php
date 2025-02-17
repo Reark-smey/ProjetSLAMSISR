@@ -16,7 +16,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar+ bvn"></span>
                     </button>
-                    <a class="navbar-brand" href="{{url('/')}}">GSB Frais</a>
+                    <a class="navbar-brand" href="{{url('/')}}">Gestion des badges</a>
                 </div>
 
                 @if (Session::get('id') == 0)
@@ -38,7 +38,7 @@
                             <li><a href="{{url('/listerBadgesRecuperer')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Liste des badges récupérés </a></li>
                             <li><a href="{{url('/AjouterAdherent')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter un Adhérent </a></li>
                             <li><a href="{{url('/ajouterAutorisation')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Autoriser un Adhérent </a></li>
-                            <li><a href="{{url('/AjouterBadge')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter un badge à un Adhérent </a></li>
+                            <li><a href="{{url('/ChoisirAdherent')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter un badge à un Adhérent </a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{url('/logout')}}" data-toggle="collapse" data-target=".navbar-collapse.in" > ({{Session::get('login')}}) Se déconnecter</a> </li>
