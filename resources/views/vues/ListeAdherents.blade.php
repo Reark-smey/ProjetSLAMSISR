@@ -38,12 +38,21 @@
 
 
                     <td style="text-align:center;">
-                        <a href="{{url('/ProfilAdherent')}}/{{$unAdh->IdAdherent}}">
-                            <span class="glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="top" title="Voir Profil">
+                        <a href="{{url('/modifierAdherent')}}/{{$unAdh->IdAdherent}}">
+                            <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Modifier">
 
                             </span>
                         </a>
                     </td>
+
+                    <td>
+                        <a onclick="return confirm('vous êtes sûr de vouloir supprimer?')"
+                           href="{{route('delAdherent', [$unAdh->IdAdherent])}}">
+                            <span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top"
+                                  title="Supprimer"></span>
+                        </a>
+                    </td>
+
                 </tr>
             @endforeach
             <br> <br>

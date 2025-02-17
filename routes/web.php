@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BadgesLibresController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,8 +36,15 @@ Route::get('/listerBadgesLibresByGolf/{id}',[BadgesLibresController::class,'list
 
 Route::get('listerBadgesRecuperer', 'App\Http\Controllers\BadgesLibresController@listerBadgesRecuperer');
 
-Route::get('AjouterAdherent', [\App\Http\Controllers\AdminController::class,'AjouterAdherent']);
+Route::get('AjouterAdherent', [\App\Http\Controllers\AdminController::class,'AjouterAdherent'])->name('AddAdherent');
+Route::post('/validerAdherent', [AdminController::class,'validerAdherent'])->name('validerAdherent');
 
+Route::get('/modifierAdherent/{id}', [AdminController::class,'modifierAdherent'])->name('UpdateAdherent');
+
+Route::get('supprimerAdherent/{id}', [AdminController::class, 'supprimerAdherent'])->name('delAdherent');
+
+Route::get('ajouterAutorisation', [AdminController::class,'ajouterAutorisation'])->name('ajouterAutorisation');
+Route::post('/validerAutorisation', [AdminController::class,'validerAutorisation'])->name('validerAutorisation');
 
 
 Route::get('/ajouterEmploye', function () {return view('vues/formEmploye');});

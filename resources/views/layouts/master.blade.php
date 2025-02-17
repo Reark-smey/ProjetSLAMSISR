@@ -37,6 +37,7 @@
                             <li><a href="{{url('/selGolf')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Liste des badges libres</a></li>
                             <li><a href="{{url('/listerBadgesRecuperer')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Liste des badges récupérés </a></li>
                             <li><a href="{{url('/AjouterAdherent')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter un Adhérent </a></li>
+                            <li><a href="{{url('/ajouterAutorisation')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Autoriser un Adhérent </a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{url('/logout')}}" data-toggle="collapse" data-target=".navbar-collapse.in" > ({{Session::get('login')}}) Se déconnecter</a> </li>

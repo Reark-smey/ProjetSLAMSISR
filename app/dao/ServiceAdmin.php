@@ -3,6 +3,8 @@
 namespace App\dao;
 
 use App\Models\Adherents;
+use App\Models\etre_autoriser;
+use App\Models\golf;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\MonException;
@@ -41,6 +43,18 @@ class ServiceAdmin
             return $lesadherents;
         } catch (\Illuminate\Database\QueryException $e) {
             throw new MonException($e->getMessage(),5);
+        }
+    }
+
+    public function getAllAdherents() {
+        try {
+            $lesadherents = DB::table('adherents')
+                ->Select()
+                ->where('adherents.IdAdherent','!=',55)
+                ->get();
+            return $lesadherents;
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage());
         }
     }
     public function getListeClou() {
@@ -124,6 +138,56 @@ class ServiceAdmin
             return Adherents::query()
                 ->findOrFail($id);
         } catch(QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+    public function getAutorisationAdherent($id)
+    {
+        try {
+            return etre_autoriser::query()
+                ->findOrFail($id);
+        } catch(QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+    public function delAdherent($id) {
+        try {
+            Adherents::destroy($id);
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+    public function getAllGolf() {
+        try {
+            return Golf::all();
+        } catch (\Couchbase\QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+    public function getAllAdherent() {
+        try {
+            return Adherents::where('IdAdherent','!=','55')->get();
+        } catch (\Couchbase\QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+    public function saveAutorisationAdherent(etre_autoriser $autoriser){
+        try{
+            $autoriser->save();
+        }catch(QueryException $e){
+            $erreur = $e->getMessage();
+            throw new MonException($erreur, 5);
+        }
+    }
+
+    public function Autorisation($id){
+        try {
+
+        } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
         }
     }

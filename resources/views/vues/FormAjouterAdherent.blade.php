@@ -6,69 +6,77 @@
                 <h1> {{ $title }}</h1>
 
             </div>
-            {!!  Form::open(['route' => 'postManga']) !!}
+            {!!  Form::open(['route' => 'validerAdherent']) !!}
             <div class="col-md-9 well well-sm">
                 <div class="form-group">
-                    <label class="col-md-3 control-label">Titre :</label>
+                    <label class="col-md-3 control-label">Nom :</label>
                     <div class="col-md-6">
-                        <input type="hidden" name="hid_id" value="{{$manga->IdAdherent}}"/>
-                        <input type="text" name="nom" value="{{$manga->NomAdherent}}" required/>
+                        <input type="hidden" name="hid_id" value="{{$adherent->IdAdherent}}"/>
+                        <input type="text" name="nom" value="{{$adherent->NomAdherent}}" required/>
                     </div>
                 </div>
                 <br>
 
                 <div class="form-group">
-                    <label class="col-md-3 control-label">Titre :</label>
+                    <label class="col-md-3 control-label">Prénom :</label>
                     <div class="col-md-6">
-                        <input type="text" name="prenom" value="{{$manga->PrenomAdherent}}" required/>
+                        <input type="text" name="prenom" value="{{$adherent->PrenomAdherent}}" required/>
                     </div>
                 </div>
                 <br>
 
                 <div class="form-group">
-                    <label class="col-md-3 control-label">Titre :</label>
+                    <label class="col-md-3 control-label">Email :</label>
                     <div class="col-md-6">
-                        <input type="text" name="e_mail" value="{{$manga->E_mail}}"/>
+                        <input type="text" name="e_mail" value="{{$adherent->E_mail}}" required/>
                     </div>
                 </div>
                 <br>
 
                 <div class="form-group">
-                    <label class="col-md-3 control-label">Titre :</label>
+                    <label class="col-md-3 control-label">Téléphone :</label>
                     <div class="col-md-6">
-                        <input type="text" name="licence" value="{{$manga->License}}" required/>
+                        <input type="text" maxlength="10" name="Telephone" value="{{$adherent->Telephone}}" required/>
                     </div>
                 </div>
                 <br>
 
                 <div class="form-group">
-                    <label class="col-md-3 control-label">Titre :</label>
+                    <label class="col-md-3 control-label">Licence :</label>
                     <div class="col-md-6">
-                        <input type="number" min="0" max="54" name="niveau" value="{{$manga->Niveau}}" />
+                        <input type="text" name="licence" value="{{$adherent->License}}" />
                     </div>
                 </div>
                 <br>
 
                 <div class="form-group">
-                    <label class="col-md-3 control-label">Titre :</label>
+                    <label class="col-md-3 control-label">Niveau :</label>
                     <div class="col-md-6">
-                        <input type="text" name="username" value="{{$manga->Adherent_username}}" required />
+                        <input type="number" min="0" max="54" name="niveau" value="{{$adherent->Niveau}}" />
                     </div>
                 </div>
                 <br>
 
                 <div class="form-group">
-                    <label class="col-md-3 control-label">Titre :</label>
+                    <label class="col-md-3 control-label">Identifiant :</label>
                     <div class="col-md-6">
-                        <input type="password" maxlength="10" name="password" value="{{$manga->mdp_adherent}}" required />
+                        <input type="text" name="username" value="{{$adherent->Adherent_username}}" required />
                     </div>
                 </div>
                 <br>
 
                 <div class="form-group">
-                    <label class="col-md-3 control-label">Titre :</label>
+                    <label class="col-md-3 control-label"  >Mot de passe :</label>
                     <div class="col-md-6">
-                        <input type="text" name="type" value="{{$manga->type}}"/>
+                        <input type="password" maxlength="10" name="password" value="{{$adherent->mdp_adherent}}" required />
+                    </div>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Catégorie :</label>
+                    <div class="col-md-6">
+                        <input type="text" name="type" value="{{$adherent->type}}" required/>
                     </div>
                 </div>
                 <br>
