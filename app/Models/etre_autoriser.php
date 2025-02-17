@@ -35,4 +35,6 @@ class etre_autoriser extends Model
         }
         return implode('-', $keys); // Concatène les clés avec un tiret (modifiable)
     }
+
+
 }

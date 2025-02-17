@@ -46,6 +46,9 @@ Route::get('supprimerAdherent/{id}', [AdminController::class, 'supprimerAdherent
 Route::get('ajouterAutorisation', [AdminController::class,'ajouterAutorisation'])->name('ajouterAutorisation');
 Route::post('/validerAutorisation', [AdminController::class,'validerAutorisation'])->name('validerAutorisation');
 
+Route::match(['get','post'],'/AjouterBadge', [AdminController::class,'AjouterBadge'])->name('AjouterBadge');
+Route::post('/validerAjoutBadge', [AdminController::class,'validerAjoutBadge'])->name('validerAjoutBadge');
+
 
 Route::get('/ajouterEmploye', function () {return view('vues/formEmploye');});
 

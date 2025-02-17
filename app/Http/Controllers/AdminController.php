@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController
 {
-    public function listerAdherents() {
+    public function listerAdherents()
+    {
         $ServiceAdmin = new ServiceAdmin();
         try {
             $lesAdherents = $ServiceAdmin->getListeAdherents();
@@ -21,9 +22,11 @@ class AdminController
             $erreur = $e->getMessage();
             return view('vues/error', compact('erreur'));
         }
-        return view('vues/ListeAdherents',compact('lesAdherents'));
+        return view('vues/ListeAdherents', compact('lesAdherents'));
     }
-    public function listerAdherentsClou() {
+
+    public function listerAdherentsClou()
+    {
         $ServiceAdmin = new ServiceAdmin();
         try {
             $lesAdherents = $ServiceAdmin->getListeClou();
@@ -31,10 +34,11 @@ class AdminController
             $monErreur = $e->getMessage();
             return view('vues/error', compact('monErreur'));
         }
-        return view('vues/ListeDroitsClou',compact('lesAdherents'));
+        return view('vues/ListeDroitsClou', compact('lesAdherents'));
     }
 
-    public function listerAdherentsGouverneur() {
+    public function listerAdherentsGouverneur()
+    {
         $ServiceAdmin = new ServiceAdmin();
         try {
             $lesAdherents = $ServiceAdmin->getListeGouverneur();
@@ -42,10 +46,11 @@ class AdminController
             $monErreur = $e->getMessage();
             return view('vues/error', compact('monErreur'));
         }
-        return view('vues/ListeDroitsGouverneur',compact('lesAdherents'));
+        return view('vues/ListeDroitsGouverneur', compact('lesAdherents'));
     }
 
-    public function listerAdherentsBeaujolais() {
+    public function listerAdherentsBeaujolais()
+    {
         $ServiceAdmin = new ServiceAdmin();
         try {
             $lesAdherents = $ServiceAdmin->getListeBeaujolais();
@@ -53,7 +58,7 @@ class AdminController
             $monErreur = $e->getMessage();
             return view('vues/error', compact('monErreur'));
         }
-        return view('vues/ListeDroitsBeaujolais',compact('lesAdherents'));
+        return view('vues/ListeDroitsBeaujolais', compact('lesAdherents'));
     }
 
     public function AjouterAdherent()
@@ -63,7 +68,7 @@ class AdminController
             $title = "Ajouter un adhérent";
             $adherent = new Adherents();
 
-            return view('vues/FormAjouterAdherent', compact( 'title', 'adherent'));
+            return view('vues/FormAjouterAdherent', compact('title', 'adherent'));
         } catch (Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/error', compact('erreur'));
@@ -120,7 +125,6 @@ class AdminController
         $serviceAdmin->delAdherent($id);
         return redirect('listerAdherents');
     }
-
 
 
     public function ajouterAutorisation()
@@ -184,6 +188,98 @@ class AdminController
             return view('vues/error', compact('erreur'));
         }
     }
+
+    public function AjouterBadge(Request $request)
+    {
+        try {
+            $title="Ajouter un badge à un adhérent";
+            // Récupération de l'adhérent sélectionné dans le formulaire
+            $idAdherent = $request->input('adherent');
+
+            $serviceAdmin = new ServiceAdmin();
+            $golf = $serviceAdmin->getAllGolf();
+            $adherent = $serviceAdmin->getAllAdherent();
+
+            // Récupère les choix où l'adhérent est autorisé
+            $choixAutorises = [];
+            if ($idAdherent) {
+                $choixAutorises = etre_autoriser::where('IdAdherent', $idAdherent)->pluck('IdGolf')->toArray();
+            }
+
+            // Tableau des noms des golfs
+            $nomsGolfs = [
+                1 => 'Golf du Clou',
+                2 => 'Golf du Gouverneur',
+                3 => 'Golf du Beaujolais'
+            ];
+
+            // Filtrer pour ne garder que les choix autorisés
+            $options = array_filter($nomsGolfs, function ($key) use ($choixAutorises) {
+                return in_array($key, $choixAutorises);
+            }, ARRAY_FILTER_USE_KEY);
+
+            // Tableau des jours de la semaine commençant par Dimanche
+            $joursSemaine = [
+                1 => 'Dimanche',
+                2 => 'Lundi',
+                3 => 'Mardi',
+                4 => 'Mercredi',
+                5 => 'Jeudi',
+                6 => 'Vendredi',
+                7 => 'Samedi'
+            ];
+
+            // Passer l'adhérent sélectionné, les options et les jours à la vue
+            return view('vues/AjouterBadge', compact('options','title', 'golf', 'adherent', 'idAdherent', 'joursSemaine'));
+
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/error', compact('erreur'));
+        }
+    }
+
+
+
+
+    public function validerAjoutBadge(Request $request)
+    {
+        try {
+            // Récupération des données du formulaire
+            $idAdherent = $request->input('adherent');
+            $jour = $request->input('Jour');
+            $lieu = $request->input('Lieu');
+
+            // Vérification que toutes les données nécessaires sont présentes
+            if ($idAdherent && $jour && $lieu) {
+                // Vérification si le badge existe déjà pour cet adhérent, ce jour et ce lieu
+                $badgeExistant = badges::where('IdAdherent', $idAdherent)
+                    ->where('Jour', $jour)
+                    ->where('IdGolf', $lieu)
+                    ->first();
+
+                if ($badgeExistant) {
+                    // Mise à jour du badge existant si nécessaire
+                    $badgeExistant->updated_at = now();
+                    $badgeExistant->save();
+                } else {
+                    // Création d'un nouveau badge
+                    $badge = new badges();
+                    $badge->IdAdherent = $idAdherent;
+                    $badge->Jour = $jour;
+                    $badge->IdGolf = $lieu;
+                    $badge->save();
+                }
+
+                return redirect('listerAdherents')->with('success', 'Badge ajouté avec succès.');
+            } else {
+                return redirect()->back()->with('error', 'Veuillez remplir tous les champs.');
+            }
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/error', compact('erreur'));
+        }
+    }
+
 
 
 
