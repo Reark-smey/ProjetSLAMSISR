@@ -240,8 +240,10 @@ class AdminController
                 $idBadge = $idBadge['IdBadge'];
             }
 
-            return view('vues/AjouterBadge',
-                compact('Lieu','title','idBadge'));
+            return view('vues.AjouterBadge', [
+                'Lieu' => $Lieu,
+                'idBadge' => $idBadge
+            ], compact('title') );
 
         } catch (Exception $exception) {
             $erreur = $exception->getMessage();

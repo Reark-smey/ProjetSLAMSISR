@@ -215,14 +215,11 @@ class ServiceAdmin
 
     public function getGolfByAutorisation($id){
         try {
-            $golf = DB::table('golf')
-            ->select('golf.IdGolf','golf.NomGolf','etre_autoriser.IdAdherent','etre_autoriser.IdGolf')
-                ->join('etre_autoriser','etre_autoriser.IdGolf','=','golf.IdGolf')
-                ->join('adherents','etre_autoriser.IdAdherent','=','adherents.IdAdherent')
-                ->join('badges','badges.IdAdherent','=','adherents.IdAdherent')
-                ->where('adherents.IdAdherent','=',$id)
-                ->distinct()
-            ->get();
+            return DB::table('etre_autoriser')
+                ->join('golf', 'etre_autoriser.IdGolf', '=', 'golf.IdGolf')
+                ->where('etre_autoriser.IdAdherent', '=', $id)
+                ->select('golf.IdGolf', 'golf.NomGolf')
+                ->get();
             return $golf;
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);

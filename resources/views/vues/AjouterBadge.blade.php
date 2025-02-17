@@ -22,7 +22,7 @@
                     @endforeach
                 </select>
             </div>
-
+    <br>
             <div class="form-group">
                 <label class="col-md-3 control-label">Jour de la semaine :</label>
                 <div class="col-md-6">
