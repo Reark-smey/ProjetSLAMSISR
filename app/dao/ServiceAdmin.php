@@ -147,6 +147,17 @@ class ServiceAdmin
     }
     public function saveBadge(Badges $badge){
         try {
+
+            $badge->save();
+        } catch(QueryException $e){
+            $erreur = $e->getMessage();
+            throw new MonException($erreur, 5);
+        }
+    }
+
+    public function saveBadgeFill(Badges $badge){
+        try {
+            unset($badge->IdAdherent);
             $badge->save();
         } catch(QueryException $e){
             $erreur = $e->getMessage();
@@ -224,6 +235,15 @@ class ServiceAdmin
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
 
+        }
+    }
+
+    public function getBadgeByID($id) {
+        try {
+            return Badges::query()
+                ->findOrFail($id);
+        }catch ( QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
         }
     }
 

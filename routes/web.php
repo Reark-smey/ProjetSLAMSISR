@@ -49,7 +49,7 @@ Route::post('/validerAutorisation', [AdminController::class,'validerAutorisation
 Route::get('ChoisirAdherent', [AdminController::class,'ChoisirAdherent'])->name('ChoisirAdherent');
 Route::post('/validerChoixAdherent', [AdminController::class,'validerChoixAdherent'])->name('validerChoixAdherent');
 
-Route::get('/AjouterBadge/{id}', [AdminController::class,'AjouterBadge'])->name('AjouterBadge');
+Route::get('/AjouterBadge', [AdminController::class,'AjouterBadge'])->name('AjouterBadge');
 Route::post('/validerAjoutBadge', [AdminController::class,'validerAjoutBadge'])->name('validerAjoutBadge');
 
 

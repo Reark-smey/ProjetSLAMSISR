@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-
+<br>
     {!! Form::open(['url'=> 'login']) !!}
 <div class="col-md-12 well well-md">
     <center><h1>Authentification</h1></center>

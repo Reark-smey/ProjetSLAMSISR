@@ -224,11 +224,12 @@ class AdminController
         }
     }
 
-    public function AjouterBadge($id) {
+    public function AjouterBadge() {
         try {
             $title = "Choisir le lieu et le jour";
             $serviceAdmin = new ServiceAdmin();
-            $Lieu = $serviceAdmin->getGolfByAutorisation($id);
+            $adherent = $serviceAdmin->getAllAdherents();
+            $Lieu = $serviceAdmin->getAllGolf();
 
             // Récupération de l'IdBadge depuis la session
             $idBadge = session('badges');
@@ -240,10 +241,10 @@ class AdminController
                 $idBadge = $idBadge['IdBadge'];
             }
 
-            return view('vues.AjouterBadge', [
+            return view('vues/AjouterBadge', [
                 'Lieu' => $Lieu,
                 'idBadge' => $idBadge
-            ], compact('title') );
+            ], compact('title', 'adherent' ) );
 
         } catch (Exception $exception) {
             $erreur = $exception->getMessage();
@@ -251,16 +252,23 @@ class AdminController
         }
     }
 
-    public function validerAjoutBadge(Request $request) {
+    public function validerAjoutBadge(Request $request)
+    {
         try {
-                $serviceAdmin = new ServiceAdmin();
-                $id_badges = $request->input('hid_id');
-                $badge = $serviceAdmin->GetBadge($id_badges);
-                $badge->Lieu = $request->input('Lieu');
-                $badge->Jour = $request->input('Jour');
-                $serviceAdmin->saveBadge($badge);
+            $serviceAdmin = new ServiceAdmin();
+            $id_badge = $request->input('hid_id');
+            if ($id_badge == 0) {
+                $badge = new Badges();
+            } else {
+                $badge = $serviceAdmin->getBadgeByID($id_badge);
+            }
+            $badge->IdAdherent = $request->input('adherent');
+            $badge->Lieu = $request->input('Lieu');
+            $badge->Jour = $request->input('Jour');
 
-                return redirect('listerAdherents');
+
+            $serviceAdmin->saveBadge($badge);
+            return redirect('listerAdherents');
 
         } catch (Exception $e) {
             $erreur = $e->getMessage();
