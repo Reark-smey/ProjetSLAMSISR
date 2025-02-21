@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BadgesLibresController;
+use App\Http\Controllers\MembreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,7 +53,7 @@ Route::post('/validerChoixAdherent', [AdminController::class,'validerChoixAdhere
 Route::get('/AjouterBadge', [AdminController::class,'AjouterBadge'])->name('AjouterBadge');
 Route::post('/validerAjoutBadge', [AdminController::class,'validerAjoutBadge'])->name('validerAjoutBadge');
 
-
+Route::get('/InfoMembre', [MembreController::class,'InfoMembre'])->name('InfoMembre');
 
 
 Route::get('/ajouterEmploye', function () {return view('vues/formEmploye');});

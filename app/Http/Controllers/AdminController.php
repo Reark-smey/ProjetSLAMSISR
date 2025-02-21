@@ -109,7 +109,7 @@ class AdminController
     public function modifierAdherent($id)
     {
         try {
-            $title = "Modifer un adhérent";
+            $title = "Modifer les informations";
             $serviceAdmin = new ServiceAdmin();
             $adherent = $serviceAdmin->getAdherent($id);
 
