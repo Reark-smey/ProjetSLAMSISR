@@ -1,7 +1,9 @@
 @extends('layouts.master')
 @section('content')
 
-
+    <br><br><br><br>
+    <br><br><br><br>
+    <br><br><br><br>
 
     <div class="container">
         <div class="blanc">
@@ -45,6 +47,14 @@
                         </a>
                     </td>
 
+                    <td style="text-align:center;">
+                        <a href="{{url('/ProfilMembre')}}/{{$unAdh->IdAdherent}}">
+                            <span class="glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="top" title="Voir profil">
+
+                            </span>
+                        </a>
+                    </td>
+
                     <td>
                         <a onclick="return confirm('vous êtes sûr de vouloir supprimer?')"
                            href="{{route('delAdherent', [$unAdh->IdAdherent])}}">
@@ -60,10 +70,11 @@
 
 
         </table>
+    </div>
         <div class="d-flex justify-content-center">
             {{ $lesAdherents->links() }}
         </div>
-    </div>
+
 
 
 

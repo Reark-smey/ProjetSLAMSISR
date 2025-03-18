@@ -2,6 +2,8 @@
 @section('content')
 
     <br><br><br><br>
+    <br><br><br><br>
+    <br><br><br><br>
     <div class="container">
         <div class="blanc">
 
@@ -26,8 +28,8 @@
                     <td>{{$unBadgeRecuperer->DateLiberation}} </td>
                     <td>{{$unBadgeRecuperer->Jour}}</td>
                     <td>{{$unBadgeRecuperer->Lieu}}</td>
-                    <td>{{$unBadgeRecuperer->NomAdherent}}</td>
-                    <td>{{$unBadgeRecuperer->PrenomAdherent}}</td>
+                    <td>{{$unBadgeRecuperer->NomRecuperateur}}</td>
+                    <td>{{$unBadgeRecuperer->PrenomRecuperateur}}</td>
                     <td>{{$unBadgeRecuperer->DateRecuperer}}</td>
 
                 </tr>

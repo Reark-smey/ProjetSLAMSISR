@@ -226,7 +226,7 @@ class AdminController
 
     public function AjouterBadge() {
         try {
-            $title = "Choisir le lieu et le jour";
+            $title = "Ajouter un badge à un adhérent";
             $serviceAdmin = new ServiceAdmin();
             $adherent = $serviceAdmin->getAllAdherents();
             $Lieu = $serviceAdmin->getAllGolf();
@@ -275,5 +275,7 @@ class AdminController
             return view('vues/error', compact('erreur'));
         }
     }
+
+
 
 }

@@ -57,4 +57,8 @@ class ControllerLogin
         return view('home');
     }
 
+    public function unauthorized(){
+        abort(401, 'Unauthorized access.');
+    }
+
 }

@@ -31,5 +31,30 @@ class MembreController
         }
     }
 
+    public function ProfilMembre($id)
+    {
+        try {
+
+            $servicesMembre = new ServiceMembre();
+            $lesAdherents = $servicesMembre->getInfoMembre($id);
+
+            return view('vues/InfoMembre', compact( 'lesAdherents'));
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/error', compact('erreur'));
+        }
+    }
+    public function MesBadges() {
+        try  {
+            $serviceMembre = new ServiceMembre();
+            $mesBadges = $serviceMembre->getInfoBadge();
+
+            return view('vues/MesBadges', compact( 'mesBadges'));
+
+        } catch ( Exception $e ) {
+            $erreur = $e->getMessage();
+            return view('vues/error', compact('erreur'));
+        }
+    }
 
 }

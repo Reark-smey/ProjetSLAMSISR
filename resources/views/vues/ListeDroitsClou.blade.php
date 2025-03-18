@@ -1,7 +1,9 @@
 @extends('layouts.master')
 @section('content')
 
-<br><br><br><br>
+    <br><br><br><br>
+    <br><br><br><br>
+    <br><br><br><br>
     <div class="container">
         <div class="blanc">
             <h1>Liste des personnes autorisées à jouer au Clou</h1>

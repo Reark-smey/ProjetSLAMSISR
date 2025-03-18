@@ -1,9 +1,9 @@
 @extends('layouts.master')
 @section('content')
-    <br>
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
+    <br><br><br><br>
+    <br><br><br><br>
+
     <div>
         <div class="container">
             <div class="blanc">
@@ -28,16 +28,20 @@
             </div>
             <br><br>
 
+
             <div class="form-group">
-                <label>Choisir le lieu :</label>
-                <select class="form-control" name="Lieu">
-                    <option value="" disabled selected="selected">Sélectionner un lieu</option>
-                    @foreach($Lieu as $unLieu)
-                        <option value="{{ $unLieu->NomGolf }}">{{ $unLieu->NomGolf }}</option>
-                    @endforeach
-                </select>
+                <label class="col-md-3 control-label">Choisir le Lieu:</label>
+                <div class="col-md-6">
+                    <select class="form-control" name="Lieu">
+                        <option value="" disabled selected="selected">Sélectionner un lieu</option>
+                        @foreach($Lieu as $unLieu)
+                            <option value="{{ $unLieu->NomGolf }}">{{ $unLieu->NomGolf }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-    <br>
+            <br><br>
+
             <div class="form-group">
                 <label class="col-md-3 control-label">Jour de la semaine :</label>
                 <div class="col-md-6">
@@ -53,10 +57,18 @@
                     </select>
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary">Valider</button>
-            {!! Form::close() !!}
-
-
+<br><br>
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <button type="submit" class="btn btn-default btn-primary"><span
+                            class="glyphicon glyphicon-ok"></span> Valider
+                    </button>
+                    &nbsp;
+                    <button type="button" class="btn btn-default btn-primary"
+                            onclick="{ window.location = '{{ url('/') }}';}">
+                        <span class="glyphicon glyphicon-remove"></span>Annuler
+                    </button>
+                </div>
+            </div>
         </div>
     </div>

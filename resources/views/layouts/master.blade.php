@@ -30,6 +30,9 @@
                 @if (Session::get('id') >0 and Session::get('type') == 'Administrateur')
                     <div class="collapse navbar-collapse" id="navbar-collapse-target">
                         <ul class="nav navbar-collapse navbar-nav navbar-left" id="navbar-collapse-target" >
+                            <li><a href="{{url('/MesBadges')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Mes Badges</a></li>
+                            <li><a href="{{url('/InfoMembre')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Mes informations</a></li>
+                            <li><a href="{{url('/LibererUnBadge')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Libérer un badge</a></li>
                             <li><a href="{{url('/listerAdherents')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Liste des Adhérents</a></li>
                             <li><a href="{{url('/DroitsGolfClou')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Autorisation Clou</a></li>
                             <li><a href="{{url('/DroitsGolfGouverneur')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Autorisation Gouverneur</a></li>
@@ -50,10 +53,10 @@
                 @if (Session::get('id') >0 and Session::get('type') == 'Membre')
                     <div class="collapse navbar-collapse" id="navbar-collapse-target">
                         <ul class="nav navbar-collapse navbar-nav navbar-left" id="navbar-collapse-target" >
-                            <li><a href="{{url('/getFraisVisiteur')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Mes Badges</a></li>
+                            <li><a href="{{url('/MesBadges')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Mes Badges</a></li>
                             <li><a href="{{url('/InfoMembre')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Mes informations</a></li>
-                            <li><a href="{{url('/selGolf')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Réserver un badge</a></li>
-                            <li><a href="{{url('/ajouterFrais')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Libérer un badge</a></li>
+                            <li><a href="{{url('/listerGolfAuth')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Réserver un badge</a></li>
+                            <li><a href="{{url('/LibererUnBadge')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Libérer un badge</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{url('/logout')}}" data-toggle="collapse" data-target=".navbar-collapse.in" > ({{Session::get('login')}}) Se déconnecter</a> </li>

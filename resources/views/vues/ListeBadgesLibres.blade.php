@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
-
+    <br><br><br><br>
+    <br><br><br><br>
     <br><br><br><br>
     <div class="container">
         <div class="blanc">
@@ -24,7 +25,7 @@
                     <td>{{$unBadgeLibre->Jour}}</td>
                     <td>{{$unBadgeLibre->Lieu}}</td>
                     <td style="text-align:center;">
-                        <a href="{{url('/ReserverBadgeLibre')}}/{{$unBadgeLibre->IdBadgeLibre}}">
+                        <a href="{{url('/ReserverBadgeLibre/')}}/{{$unBadgeLibre->IdBadgeLibre}}">
                             <span class="glyphicon glyphicon-book" data-toggle="tooltip" data-placement="top" title="Réserver">
 
                             </span>

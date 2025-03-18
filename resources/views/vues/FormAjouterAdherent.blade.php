@@ -1,9 +1,8 @@
 @extends('layouts.master')
 @section('content')
-    <br>
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
+    <br><br><br><br>
+    <br><br><br><br>
     <div>
         <div class="container">
             <div class="blanc">
@@ -32,7 +31,7 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label">Email :</label>
                     <div class="col-md-6">
-                        <input type="text" name="e_mail" value="{{$adherent->E_mail}}" required/>
+                        <input type="text" name="e_mail" value="{{$adherent->E_Mail}}" required/>
                     </div>
                 </div>
                 <br>
@@ -76,14 +75,15 @@
                     </div>
                 </div>
                 <br>
-
+                @if (Session::get('id') >0 and Session::get('type') == 'Administrateur')
                 <div class="form-group">
                     <label class="col-md-3 control-label">Catégorie :</label>
                     <div class="col-md-6">
-                        <input type="text" name="type" value="{{$adherent->type}}" required/>
+                        <input type="text" name="type" value="{{$adherent->Type}}" required/>
                     </div>
                 </div>
                 <br>
+                @endif
 
 
                 <div class="form-group">

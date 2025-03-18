@@ -28,6 +28,7 @@ class ServiceLogin
                 Session::put('type', $adherent->Type);
                 Session::put('login',$login);
                 $connected = true;
+
             }
         }catch (QueryException $e){
             throw new MonException($e->getMessage(), 5);
@@ -39,4 +40,6 @@ class ServiceLogin
     {
     Session::put('id', 0);
     }
+
+
 }

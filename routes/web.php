@@ -53,23 +53,18 @@ Route::post('/validerChoixAdherent', [AdminController::class,'validerChoixAdhere
 Route::get('/AjouterBadge', [AdminController::class,'AjouterBadge'])->name('AjouterBadge');
 Route::post('/validerAjoutBadge', [AdminController::class,'validerAjoutBadge'])->name('validerAjoutBadge');
 
+
+route::get('ReserverBadgeLibre/{id}', [BadgesLibresController::class,'ReserverBadgeLibre'])->name('ReserverBadgeLibre');
+Route::get('listerGolfAuth', [\App\Http\Controllers\BadgesLibresController::class,'listerGolfAuth'])->name('listerGolfAuth');
+
+
 Route::get('/InfoMembre', [MembreController::class,'InfoMembre'])->name('InfoMembre');
+Route::get('/ProfilMembre/{id}', [MembreController::class,'ProfilMembre'])->name('ProfilMembre');
+
+Route::post('/validerBadgeLibre', [BadgesLibresController::class,'validerBadgeLibre'])->name('validerBadgeLibre');
+
+Route::get('/LibererUnBadge', [BadgesLibresController::class,'LibererUnBadge'])->name('LibererUnBadge');
+Route::post('/validerLibererBadgeLibre', [BadgesLibresController::class,'validerLibererBadgeLibre'])->name('validerLibererBadgeLibre');
 
 
-Route::get('/ajouterEmploye', function () {return view('vues/formEmploye');});
-
-Route::post('/postEmploye', 'App\Http\Controllers\EmployeController@postAjouterEmploye');
-Route::get('/listerEmploye', 'App\Http\Controllers\EmployeController@listerEmployes');
-
-Route::get('/modifierEmploye/{id}', 'App\Http\Controllers\EmployeController@modifier');
-Route::post('/postmodifierEmploye/{id}', 'App\Http\Controllers\EmployeController@postmodifier');
-
-Route::get('/ajoutEquipe', function () {return view('vues/FormEquipe');});
-
-Route::post('/postEquipe', 'App\Http\Controllers\EquipeController@postAjouterEquipe');
-Route::get('/listerEquipe', 'App\Http\Controllers\EquipeController@listerEquipe');
-
-Route::get('/modifierEquipe/{id}', 'App\Http\Controllers\EquipeController@modifierEquipe');
-Route::post('/postmodifierEquipe/{id}', 'App\Http\Controllers\EquipeController@postmodifierEquipe');
-
-
+Route::get('/MesBadges', [MembreController::class,'MesBadges'])->name('MesBadges');
