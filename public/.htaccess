@@ -4,39 +4,18 @@
     </IfModule>
 
     RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^([^\.]+)$ $1.php [NC,L]
-    # Autoriser l'accès à tous
-    <FilesMatch ".*">
-        Require all granted
-    </FilesMatch>
 
-    # Gérer l'Authorization Header
+    # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-
-    RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
-    RewriteRule ^ %1 [L,R=301,NE,L]
-    # Redirection des URLs avec slash final (évite les erreurs 404)
+    # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Rediriger toutes les requêtes vers index.php si le fichier/dossier n'existe pas
+    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ home.blade.php [L]
-
-    RewriteCond %{HTTP_HOST} ^wwww\.(.+)$ [NC]
-    RewriteRule ^(.*)$ https://1%/$1 [R=301,L]
-
-    RewriteCond %{HTTP_HOST} ^81.250.151.15:21480\.(.+)$ [NC]
-    RewriteRule ^(.*)$ https://www.81.250.151.15:21480/$1 [L,R=301,L]
-
-
-
-
-
-
+    RewriteRule ^ index.php [L]
 </IfModule>
