@@ -83,6 +83,7 @@ class ClassementController
 
     public function ListerProduitOneFour() {
         try {
+            $title ="Produit 1_4";
             $serviceclassement = new ServiceClassement();
 
             $produit = $serviceclassement->EvolutionProduitOneFour();
@@ -100,6 +101,7 @@ class ClassementController
 
     public function ListerProduitOneOne() {
         try {
+            $title ="Produit 1_1";
             $serviceclassement = new ServiceClassement();
 
             $produit = $serviceclassement->EvolutionProduitOneOne();

@@ -67,8 +67,7 @@ class ServiceClassement
                 ->orderByDesc('Top5C.top5')
                 ->orderBy('ligne_facturation.mois')
                 ->orderBy('clients.ClientID')
-
-                ->paginate(16);
+                ->get();
 
             return $topClients;
         }catch  (\Illuminate\Database\QueryException $e) {
