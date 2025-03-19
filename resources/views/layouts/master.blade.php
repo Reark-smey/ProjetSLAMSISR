@@ -16,54 +16,22 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar+ bvn"></span>
                     </button>
-                    <a class="navbar-brand" href="{{url('/')}}">Gestion des badges</a>
+                    <a class="navbar-brand" href="{{url('/')}}"></a>
                 </div>
 
-                @if (Session::get('id') == 0)
-                    <div class="collapse navbar-collapse" id="navbar-collapse-target">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{url('/formLogin')}}" data-toggle="collapse" data-targer=".navbar-collapse.in"> Se Connecter</a> </li>
-                        </ul>
-                    </div>
-                @endif
 
-                @if (Session::get('id') >0 and Session::get('type') == 'Administrateur')
                     <div class="collapse navbar-collapse" id="navbar-collapse-target">
                         <ul class="nav navbar-collapse navbar-nav navbar-left" id="navbar-collapse-target" >
-                            <li><a href="{{url('/MesBadges')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Mes Badges</a></li>
-                            <li><a href="{{url('/InfoMembre')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Mes informations</a></li>
-                            <li><a href="{{url('/LibererUnBadge')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Libérer un badge</a></li>
-                            <li><a href="{{url('/listerAdherents')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Liste des Adhérents</a></li>
-                            <li><a href="{{url('/DroitsGolfClou')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Autorisation Clou</a></li>
-                            <li><a href="{{url('/DroitsGolfGouverneur')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Autorisation Gouverneur</a></li>
-                            <li><a href="{{url('/DroitsGolfBeaujolais')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Autorisation Beaujolais</a></li>
-                            <li><a href="{{url('/selGolf')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Liste des badges libres</a></li>
-                            <li><a href="{{url('/listerBadgesRecuperer')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Liste des badges récupérés </a></li>
-                            <li><a href="{{url('/AjouterAdherent')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter un Adhérent </a></li>
-                            <li><a href="{{url('/ajouterAutorisation')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Autoriser un Adhérent </a></li>
-                            <li><a href="{{url('/AjouterBadge')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter un badge à un Adhérent </a></li>
+                            <li><a href="{{url('/ChoisirGrandClient')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Classement Top 10</a></li>
+                            <li><a href="{{url('/ListerTopFive')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Evolution des montants du Top 5</a></li>
+                            <li><a href="{{url('/ListerProduitOneOne')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Produit 1_1</a></li>
+                            <li><a href="{{url('/ListerProduitOneFour')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Produit 1_4</a></li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{url('/logout')}}" data-toggle="collapse" data-target=".navbar-collapse.in" > ({{Session::get('login')}}) Se déconnecter</a> </li>
 
-                        </ul>
                     </div>
-                @endif
 
-                @if (Session::get('id') >0 and Session::get('type') == 'Membre')
-                    <div class="collapse navbar-collapse" id="navbar-collapse-target">
-                        <ul class="nav navbar-collapse navbar-nav navbar-left" id="navbar-collapse-target" >
-                            <li><a href="{{url('/MesBadges')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Mes Badges</a></li>
-                            <li><a href="{{url('/InfoMembre')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Mes informations</a></li>
-                            <li><a href="{{url('/listerGolfAuth')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Réserver un badge</a></li>
-                            <li><a href="{{url('/LibererUnBadge')}}" data-toggle="collapse" data-target=".navbar-collapse.in">Libérer un badge</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{url('/logout')}}" data-toggle="collapse" data-target=".navbar-collapse.in" > ({{Session::get('login')}}) Se déconnecter</a> </li>
 
-                        </ul>
-                    </div>
-                @endif
+
 
             </div><!--/.container-fluid -->
         </nav>
