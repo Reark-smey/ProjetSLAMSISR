@@ -42,4 +42,9 @@
 
     </div>
 
+
+    <div class="d-flex justify-content-center">
+        {{ $TopFive->links() }}
+    </div>
+
 @stop
