@@ -65,8 +65,9 @@ class ServiceClassement
                 ->where('ligne_facturation.mois', '<', '2022-05-01')
                 ->groupBy('clients.NomClient', 'ligne_facturation.mois','Top5C.top5')
                 ->orderByDesc('Top5C.top5')
-                ->orderBy('clients.ClientID')
                 ->orderBy('ligne_facturation.mois')
+                ->orderBy('clients.ClientID')
+
                 ->paginate(16);
 
             return $topClients;
