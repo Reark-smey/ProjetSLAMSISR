@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Autoriser l'accès à tous
+    <FilesMatch ".*">
+        Require all granted
+    </FilesMatch>
+
+    # Gérer l'Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirection des URLs avec slash final (évite les erreurs 404)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Rediriger toutes les requêtes vers index.php si le fichier/dossier n'existe pas
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ home.blade.php [L]
+</IfModule>
